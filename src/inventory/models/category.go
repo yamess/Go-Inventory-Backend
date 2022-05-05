@@ -15,6 +15,9 @@ type Category struct {
 	Name string `json:"name" gorm:"unique" validate:"required" example:"Phone"`
 	Base
 }
+type CategoryRequest struct {
+	Name string `json:"name" gorm:"unique" validate:"required" example:"Phone"`
+}
 
 type Categories []Category
 

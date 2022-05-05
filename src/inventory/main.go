@@ -7,6 +7,15 @@ import (
 )
 
 func main() {
+	// @title User API documentation
+	// @version 1.0.0
+	// @description     This is a simple rest api for category
+	// @contact.name   API Support
+	// @contact.url    http://www.swagger.io/support
+	// @contact.email  support@swagger.io
+	// @host localhost:8081
+	// @BasePath /api/v1
+
 	// Load environment variables
 	configs.InitEnv()
 

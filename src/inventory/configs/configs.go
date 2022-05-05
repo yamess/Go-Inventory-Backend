@@ -10,6 +10,7 @@ import (
 var Host string
 var PgDbUrl string
 var Version string
+var DefaultUser uint = 1
 
 func InitEnv() {
 	if err := godotenv.Load("../../.env"); err != nil {
