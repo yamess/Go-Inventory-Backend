@@ -6,6 +6,6 @@ import (
 )
 
 func Validator(c *gin.Context) {
-	fmt.Println("I'm a dummy test")
+	fmt.Println("I'm a dummy test test")
 	c.Next()
 }
