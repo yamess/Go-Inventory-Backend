@@ -1,0 +1,1155 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple rest api for category",
+        "title": "User API documentation",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "version": "1.0.0"
+    },
+    "host": "localhost:8081",
+    "basePath": "/api/v1",
+    "paths": {
+        "/category": {
+            "get": {
+                "description": "Get the list all the categories",
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get all the categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create new category based on parameters",
+                "parameters": [
+                    {
+                        "description": "Category Data",
+                        "name": "Category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CategoryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Category"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/delete/{id}": {
+            "delete": {
+                "description": "Delete existing category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Delete existing category based on id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/update/{id}": {
+            "patch": {
+                "description": "Update existing category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Update existing category based on parameters",
+                "parameters": [
+                    {
+                        "description": "Category Data",
+                        "name": "Category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CategoryRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Category ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Category"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/{id}": {
+            "get": {
+                "description": "get category by ID",
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get one category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Category"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "description": "Get the list all the products",
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all the products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Product"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create new product based on parameters",
+                "parameters": [
+                    {
+                        "description": "Product Data",
+                        "name": "Product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ProductRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete all the existing products",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete all the existing products",
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/delete/{id}": {
+            "delete": {
+                "description": "Delete existing product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete existing product based on id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/update/{id}": {
+            "patch": {
+                "description": "Update existing Product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update existing product based on parameters",
+                "parameters": [
+                    {
+                        "description": "Product Data",
+                        "name": "Product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "description": "get product by ID",
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get one product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/supplier": {
+            "get": {
+                "description": "Get the list all the suppliers",
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Get all the suppliers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Supplier"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new supplier",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Create new supplier based on parameters",
+                "parameters": [
+                    {
+                        "description": "Supplier Data",
+                        "name": "Supplier",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SupplierRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Supplier"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete all the existing suppliers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Delete all the existing suppliers",
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/supplier/delete/{id}": {
+            "delete": {
+                "description": "Delete existing supplier",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Delete existing supplier based on id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Supplier ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/supplier/update/{id}": {
+            "patch": {
+                "description": "Update existing Supplier",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Update existing supplier based on parameters",
+                "parameters": [
+                    {
+                        "description": "Supplier Data",
+                        "name": "Supplier",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Supplier"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Supplier ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Supplier"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/supplier/{id}": {
+            "get": {
+                "description": "get supplier by ID",
+                "tags": [
+                    "Supplier"
+                ],
+                "summary": "Get one supplier",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Supplier ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Supplier"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Address": {
+            "type": "object",
+            "required": [
+                "country",
+                "ville"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "type": "string",
+                    "example": "25 Rue Charles De Gaulle"
+                },
+                "address_line_2": {
+                    "type": "string",
+                    "example": "Apartment 103"
+                },
+                "country": {
+                    "type": "string",
+                    "example": "Burkina Faso"
+                },
+                "entity_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "postal_code": {
+                    "type": "string",
+                    "example": "1 BP 1023 Ouagadougou 1"
+                },
+                "region": {
+                    "type": "string",
+                    "example": "Kadiogo"
+                },
+                "ville": {
+                    "type": "string",
+                    "example": "Ouagadougou"
+                }
+            }
+        },
+        "models.AddressRequest": {
+            "type": "object",
+            "required": [
+                "country",
+                "ville"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "type": "string",
+                    "example": "25 Rue Charles De Gaulle"
+                },
+                "address_line_2": {
+                    "type": "string",
+                    "example": "Apartment 103"
+                },
+                "country": {
+                    "type": "string",
+                    "example": "Burkina Faso"
+                },
+                "postal_code": {
+                    "type": "string",
+                    "example": "1 BP 1023 Ouagadougou 1"
+                },
+                "region": {
+                    "type": "string",
+                    "example": "Kadiogo"
+                },
+                "ville": {
+                    "type": "string",
+                    "example": "Ouagadougou"
+                }
+            }
+        },
+        "models.Category": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Phone"
+                },
+                "updated_at": {
+                    "$ref": "#/definitions/models.NullTime"
+                },
+                "updated_by": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.CategoryRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Phone"
+                }
+            }
+        },
+        "models.Contact": {
+            "type": "object",
+            "required": [
+                "phone"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "fake@faker.com"
+                },
+                "entity_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "fax": {
+                    "type": "string",
+                    "example": "+22675010203"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "+22675010203"
+                }
+            }
+        },
+        "models.ContactRequest": {
+            "type": "object",
+            "required": [
+                "phone"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "fake@faker.com"
+                },
+                "fax": {
+                    "type": "string",
+                    "example": "+22675010203"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "+22675010203"
+                }
+            }
+        },
+        "models.NullTime": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.Product": {
+            "type": "object",
+            "required": [
+                "category_id",
+                "cost_price",
+                "product_name",
+                "quantity"
+            ],
+            "properties": {
+                "category_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "cost_price": {
+                    "type": "number",
+                    "example": 12500
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Gen 2 tv remote"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "product_attributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ProductAttributes"
+                    }
+                },
+                "product_name": {
+                    "type": "string",
+                    "example": "TV Remote"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "example": 30
+                },
+                "selling_price": {
+                    "type": "number",
+                    "example": 20000
+                },
+                "supplier_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "updated_at": {
+                    "$ref": "#/definitions/models.NullTime"
+                },
+                "updated_by": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.ProductAttributes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "weight"
+                },
+                "product_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "unit": {
+                    "type": "string",
+                    "example": "kg"
+                },
+                "value": {
+                    "type": "string",
+                    "example": "0.5"
+                }
+            }
+        },
+        "models.ProductAttributesRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "weight"
+                },
+                "unit": {
+                    "type": "string",
+                    "example": "kg"
+                },
+                "value": {
+                    "type": "string",
+                    "example": "0.5"
+                }
+            }
+        },
+        "models.ProductRequest": {
+            "type": "object",
+            "required": [
+                "category_id",
+                "cost_price",
+                "product_name",
+                "quantity"
+            ],
+            "properties": {
+                "category_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "cost_price": {
+                    "type": "number",
+                    "example": 12500
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Gen 2 tv remote"
+                },
+                "product_attributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ProductAttributesRequest"
+                    }
+                },
+                "product_name": {
+                    "type": "string",
+                    "example": "TV Remote"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "example": 30
+                },
+                "selling_price": {
+                    "type": "number",
+                    "example": 20000
+                },
+                "supplier_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "models.Supplier": {
+            "type": "object",
+            "required": [
+                "address",
+                "contact",
+                "name"
+            ],
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/models.Address"
+                },
+                "contact": {
+                    "$ref": "#/definitions/models.Contact"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Analytica Inc."
+                },
+                "person_to_contact": {
+                    "type": "string",
+                    "example": "Willy Fatime"
+                },
+                "updated_at": {
+                    "$ref": "#/definitions/models.NullTime"
+                },
+                "updated_by": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.SupplierRequest": {
+            "type": "object",
+            "required": [
+                "address",
+                "contact",
+                "name"
+            ],
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/models.AddressRequest"
+                },
+                "contact": {
+                    "$ref": "#/definitions/models.ContactRequest"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Analytica Inc."
+                },
+                "person_to_contact": {
+                    "type": "string",
+                    "example": "Willy Fatime"
+                }
+            }
+        }
+    }
+}

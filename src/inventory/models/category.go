@@ -6,6 +6,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/yamess/inventory/database"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 	"io"
 	"time"
 )
@@ -14,6 +15,10 @@ type Category struct {
 	Id   uint   `json:"id" gorm:"primaryKey" example:"1"`
 	Name string `json:"name" gorm:"unique" validate:"required" example:"Phone"`
 	Base
+}
+
+type CategoryRequest struct {
+	Name string `json:"name" gorm:"unique" validate:"required" example:"Phone"`
 }
 
 type Categories []Category
@@ -44,10 +49,10 @@ func (cs *Categories) GetRecords() *gorm.DB {
 	return res
 }
 func (c *Category) UpdateRecord(id uint, userId uint) *gorm.DB {
-	c.UpdatedAt.Time = time.Now().UTC()
+	//c.UpdatedAt.Time = time.Now().UTC()
 	c.UpdatedBy = userId
 	c.Id = id
-	res := database.MyDB.Conn.Model(&c).Omit("id", "created_at", "created_by").Updates(c)
+	res := database.MyDB.Conn.Model(&c).Clauses(clause.Returning{}).Select("Name", "UpdatedBy", "UpdatedAt").Updates(c)
 	return res
 }
 func (c *Category) DeleteRecord(id uint) *gorm.DB {
