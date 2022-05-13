@@ -17,9 +17,9 @@ func (nt *NullTime) Scan(value interface{}) error {
 
 	// if nil then make valid false
 	if reflect.TypeOf(value) == nil {
-		*nt = NullTime{Time: t.Time, Valid: false}
+		*nt = NullTime{Time: t.Time.UTC(), Valid: false}
 	} else {
-		*nt = NullTime{Time: t.Time, Valid: true}
+		*nt = NullTime{Time: t.Time.UTC(), Valid: true}
 	}
 
 	return nil

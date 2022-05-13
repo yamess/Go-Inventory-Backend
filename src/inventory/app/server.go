@@ -16,15 +16,19 @@ func Run() {
 	// This is for release in production mode
 	//gin.SetMode(gin.ReleaseMode)
 	baseRoute := gin.Default()
-
+	baseRoute.Use(utils.SetupCORS)
 	// Defining middlewares before any other code
-	baseRoute.Use(utils.Validator)
+	//baseRoute.Use(utils.Validator)
 
 	basePath := fmt.Sprintf("/api/v%s", configs.Version)
 	v1 := baseRoute.Group(basePath)
 
 	// Apply Category routers
 	routes.CategoryRoutes(v1)
+	// Apply Supplier routes
+	routes.SupplierRoutes(v1)
+	// Apply product Routes
+	routes.ProductRoutes(v1)
 
 	// Setting Swagger doc endpoint
 	v1.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

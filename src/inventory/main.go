@@ -4,6 +4,7 @@ import (
 	"github.com/yamess/inventory/app"
 	"github.com/yamess/inventory/configs"
 	"github.com/yamess/inventory/database"
+	"github.com/yamess/inventory/models"
 )
 
 func main() {
@@ -20,7 +21,11 @@ func main() {
 	configs.InitEnv()
 
 	// Apply auto migration of the models
-	database.Automigrate()
+	database.Automigrate(
+		models.Category{},
+		models.Supplier{}, models.Address{}, models.Contact{},
+		models.ProductAttributes{}, models.Product{},
+	)
 
 	app.Run()
 }

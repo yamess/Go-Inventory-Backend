@@ -1,5 +1,59 @@
 basePath: /api/v1
 definitions:
+  models.Address:
+    properties:
+      address_line_1:
+        example: 25 Rue Charles De Gaulle
+        type: string
+      address_line_2:
+        example: Apartment 103
+        type: string
+      country:
+        example: Burkina Faso
+        type: string
+      entity_id:
+        example: 1
+        type: integer
+      id:
+        example: 1
+        type: integer
+      postal_code:
+        example: 1 BP 1023 Ouagadougou 1
+        type: string
+      region:
+        example: Kadiogo
+        type: string
+      ville:
+        example: Ouagadougou
+        type: string
+    required:
+    - country
+    - ville
+    type: object
+  models.AddressRequest:
+    properties:
+      address_line_1:
+        example: 25 Rue Charles De Gaulle
+        type: string
+      address_line_2:
+        example: Apartment 103
+        type: string
+      country:
+        example: Burkina Faso
+        type: string
+      postal_code:
+        example: 1 BP 1023 Ouagadougou 1
+        type: string
+      region:
+        example: Kadiogo
+        type: string
+      ville:
+        example: Ouagadougou
+        type: string
+    required:
+    - country
+    - ville
+    type: object
   models.Category:
     properties:
       created_at:
@@ -20,6 +74,48 @@ definitions:
     required:
     - name
     type: object
+  models.CategoryRequest:
+    properties:
+      name:
+        example: Phone
+        type: string
+    required:
+    - name
+    type: object
+  models.Contact:
+    properties:
+      email:
+        example: fake@faker.com
+        type: string
+      entity_id:
+        example: 1
+        type: integer
+      fax:
+        example: "+22675010203"
+        type: string
+      id:
+        example: 1
+        type: integer
+      phone:
+        example: "+22675010203"
+        type: string
+    required:
+    - phone
+    type: object
+  models.ContactRequest:
+    properties:
+      email:
+        example: fake@faker.com
+        type: string
+      fax:
+        example: "+22675010203"
+        type: string
+      phone:
+        example: "+22675010203"
+        type: string
+    required:
+    - phone
+    type: object
   models.NullTime:
     properties:
       time:
@@ -27,6 +123,160 @@ definitions:
       valid:
         description: Valid is true if Time is not NULL
         type: boolean
+    type: object
+  models.Product:
+    properties:
+      category_id:
+        example: 1
+        type: integer
+      cost_price:
+        example: 12500
+        type: number
+      created_at:
+        type: string
+      created_by:
+        example: 1
+        type: integer
+      description:
+        example: Gen 2 tv remote
+        type: string
+      id:
+        example: 1
+        type: integer
+      product_attributes:
+        items:
+          $ref: '#/definitions/models.ProductAttributes'
+        type: array
+      product_name:
+        example: TV Remote
+        type: string
+      quantity:
+        example: 30
+        type: integer
+      selling_price:
+        example: 20000
+        type: number
+      supplier_id:
+        example: 1
+        type: integer
+      updated_at:
+        $ref: '#/definitions/models.NullTime'
+      updated_by:
+        type: integer
+    required:
+    - category_id
+    - cost_price
+    - product_name
+    - quantity
+    type: object
+  models.ProductAttributes:
+    properties:
+      id:
+        example: 1
+        type: integer
+      name:
+        example: weight
+        type: string
+      product_id:
+        example: 1
+        type: integer
+      unit:
+        example: kg
+        type: string
+      value:
+        example: "0.5"
+        type: string
+    type: object
+  models.ProductAttributesRequest:
+    properties:
+      name:
+        example: weight
+        type: string
+      unit:
+        example: kg
+        type: string
+      value:
+        example: "0.5"
+        type: string
+    type: object
+  models.ProductRequest:
+    properties:
+      category_id:
+        example: 1
+        type: integer
+      cost_price:
+        example: 12500
+        type: number
+      description:
+        example: Gen 2 tv remote
+        type: string
+      product_attributes:
+        items:
+          $ref: '#/definitions/models.ProductAttributesRequest'
+        type: array
+      product_name:
+        example: TV Remote
+        type: string
+      quantity:
+        example: 30
+        type: integer
+      selling_price:
+        example: 20000
+        type: number
+      supplier_id:
+        example: 1
+        type: integer
+    required:
+    - category_id
+    - cost_price
+    - product_name
+    - quantity
+    type: object
+  models.Supplier:
+    properties:
+      address:
+        $ref: '#/definitions/models.Address'
+      contact:
+        $ref: '#/definitions/models.Contact'
+      created_at:
+        type: string
+      created_by:
+        example: 1
+        type: integer
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Analytica Inc.
+        type: string
+      person_to_contact:
+        example: Willy Fatime
+        type: string
+      updated_at:
+        $ref: '#/definitions/models.NullTime'
+      updated_by:
+        type: integer
+    required:
+    - address
+    - contact
+    - name
+    type: object
+  models.SupplierRequest:
+    properties:
+      address:
+        $ref: '#/definitions/models.AddressRequest'
+      contact:
+        $ref: '#/definitions/models.ContactRequest'
+      name:
+        example: Analytica Inc.
+        type: string
+      person_to_contact:
+        example: Willy Fatime
+        type: string
+    required:
+    - address
+    - contact
+    - name
     type: object
 host: localhost:8081
 info:
@@ -55,4 +305,480 @@ paths:
       summary: Get all the categories
       tags:
       - Category
+    post:
+      consumes:
+      - application/json
+      description: Create new category
+      parameters:
+      - description: Category Data
+        in: body
+        name: Category
+        required: true
+        schema:
+          $ref: '#/definitions/models.CategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Create new category based on parameters
+      tags:
+      - Category
+  /category/{id}:
+    get:
+      description: get category by ID
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get one category
+      tags:
+      - Category
+  /category/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete existing category
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Delete existing category based on id
+      tags:
+      - Category
+  /category/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: Update existing category
+      parameters:
+      - description: Category Data
+        in: body
+        name: Category
+        required: true
+        schema:
+          $ref: '#/definitions/models.CategoryRequest'
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Update existing category based on parameters
+      tags:
+      - Category
+  /product:
+    delete:
+      consumes:
+      - application/json
+      description: Delete all the existing products
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Delete all the existing products
+      tags:
+      - Product
+    get:
+      description: Get the list all the products
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all the products
+      tags:
+      - Product
+    post:
+      consumes:
+      - application/json
+      description: Create new product
+      parameters:
+      - description: Product Data
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Create new product based on parameters
+      tags:
+      - Product
+  /product/{id}:
+    get:
+      description: get product by ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get one product
+      tags:
+      - Product
+  /product/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete existing product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Delete existing product based on id
+      tags:
+      - Product
+  /product/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: Update existing Product
+      parameters:
+      - description: Product Data
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Update existing product based on parameters
+      tags:
+      - Product
+  /supplier:
+    delete:
+      consumes:
+      - application/json
+      description: Delete all the existing suppliers
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Delete all the existing suppliers
+      tags:
+      - Supplier
+    get:
+      description: Get the list all the suppliers
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Supplier'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all the suppliers
+      tags:
+      - Supplier
+    post:
+      consumes:
+      - application/json
+      description: Create new supplier
+      parameters:
+      - description: Supplier Data
+        in: body
+        name: Supplier
+        required: true
+        schema:
+          $ref: '#/definitions/models.SupplierRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Supplier'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Create new supplier based on parameters
+      tags:
+      - Supplier
+  /supplier/{id}:
+    get:
+      description: get supplier by ID
+      parameters:
+      - description: Supplier ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Supplier'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get one supplier
+      tags:
+      - Supplier
+  /supplier/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete existing supplier
+      parameters:
+      - description: Supplier ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Delete existing supplier based on id
+      tags:
+      - Supplier
+  /supplier/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: Update existing Supplier
+      parameters:
+      - description: Supplier Data
+        in: body
+        name: Supplier
+        required: true
+        schema:
+          $ref: '#/definitions/models.Supplier'
+      - description: Supplier ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Supplier'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Update existing supplier based on parameters
+      tags:
+      - Supplier
 swagger: "2.0"
